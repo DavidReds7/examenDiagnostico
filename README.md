@@ -44,6 +44,20 @@ Aplicación web para administrar un catálogo de libros mediante operaciones CRU
 
 ## Instrucciones para ejecutar el proyecto
 
+### Atajo con scripts (recomendado en macOS o Linux)
+
+Desde la raíz del repositorio:
+
+```bash
+chmod +x setup.sh run.sh
+./setup.sh
+./run.sh
+```
+
+`setup.sh` crea el entorno virtual `.venv`, instala dependencias de Python y de Node, y copia `backend/.env.example` y `frontend/.env.example` a sus respectivos `.env` si aún no existen.
+
+`run.sh` aplica migraciones, inicia Django en segundo plano y deja Vite en primer plano. Variables opcionales: `DJANGO_PORT` (por defecto 8000) y `VITE_PORT` (por defecto 5173). Detener con Ctrl+C cierra ambos procesos.
+
 ### Prerrequisitos
 
 - Python 3.9 o superior.
@@ -110,16 +124,19 @@ Para evidencias reales de ejecución local, puede sustituir o complementar esta 
 
 ## Publicación en GitHub
 
+Repositorio del curso o entrega: [DavidReds7/examenDiagnostico](https://github.com/DavidReds7/examenDiagnostico).
+
+Flujo sugerido: trabajar en la rama `develop` y abrir un pull request hacia `main` cuando el código esté listo.
+
 ```bash
-git init
+git checkout -b develop
 git add .
-git commit -m "Initial commit: Biblioteca CRUD"
-git branch -M main
-git remote add origin https://github.com/USUARIO/biblioteca-crud.git
-git push -u origin main
+git commit -m "Descripción del cambio"
+git remote add origin https://github.com/DavidReds7/examenDiagnostico.git
+git push -u origin develop
 ```
 
-Reemplace `USUARIO` y el nombre del repositorio según corresponda.
+Si `origin` ya existe, omita `git remote add` y use `git push -u origin develop`.
 
 ## Uso de inteligencia artificial
 
