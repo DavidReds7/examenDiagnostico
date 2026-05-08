@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
 :root {
   color-scheme: light;
   --verde-bosque: #2f4f3c;
@@ -15,7 +17,8 @@
   --sombra: rgba(31, 41, 36, 0.12);
   --radio: 10px;
   --ancho-max: 1100px;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 *,

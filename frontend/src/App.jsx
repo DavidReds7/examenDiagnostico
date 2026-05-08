@@ -240,7 +240,7 @@ export default function App() {
         <div className="cabecera-inner">
           <h1 className="titulo-sitio">Biblioteca CRUD</h1>
           <p className="subtitulo">
-            Administración de libros con validaciones de seguridad y creación idempotente.
+            Administración de libros.
           </p>
         </div>
       </header>
@@ -250,10 +250,6 @@ export default function App() {
           <h2 id="titulo-formulario" className="panel-titulo">
             {tituloFormulario}
           </h2>
-          <p className="ayuda-formulario">
-            Los campos obligatorios están etiquetados. Las altas requieren una clave de idempotencia
-            generada automáticamente en cada intento de guardado para evitar duplicados accidentales.
-          </p>
 
           <form
             className="formulario"
@@ -378,9 +374,6 @@ export default function App() {
             </button>
           </div>
 
-          <div className="estado-sistema" role="status" aria-live="polite">
-            {cargandoLista ? "Cargando registros..." : `${elementos.length} registros visibles.`}
-          </div>
 
           <div className="tabla-envoltorio" role="region" aria-label="Tabla de libros" tabIndex={0}>
             <table className="tabla">
@@ -427,19 +420,6 @@ export default function App() {
         </section>
       </main>
 
-      <aside className="ayuda-doc" role="complementary" aria-labelledby="titulo-ayuda">
-        <h2 id="titulo-ayuda" className="oculto-visual">
-          Documentación breve
-        </h2>
-        <p>
-          Para ejecutar el proyecto completo y conocer las políticas de seguridad revise el archivo
-          README.md en la raíz del repositorio.
-        </p>
-      </aside>
-
-      <footer className="pie" role="contentinfo">
-        <small>Interfaz adaptable y uso de mensajes de estado visibles para reducir errores.</small>
-      </footer>
 
       <div
         className={`mensaje-flotante ${mensajeTipo}`}
