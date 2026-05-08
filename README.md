@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Aplicación web para administrar un catálogo de libros mediante operaciones CRUD completas. El backend expone una API REST sobre Django y MySQL, con validaciones duplicadas en servidor y cliente, protección frente a patrones peligrosos en texto (riesgos asociados a XML cuando dichos datos se procesan o serializan como marcado), creación idempotente coordinada con cerrojos de MySQL y endurecimiento HTTP básico habilitado desde Django.
+Aplicación web para administrar un catálogo de libros mediante operaciones CRUD completas. El backend expone una API REST sobre Django y MySQL, con validaciones duplicadas en servidor y cliente, protección frente a patrones peligrosos en texto, creación idempotente coordinada con cerrojos de MySQL y endurecimiento HTTP básico habilitado desde Django.
 
 ## Tecnologías utilizadas
 
@@ -29,18 +29,6 @@ Aplicación web para administrar un catálogo de libros mediante operaciones CRU
 - Cabeceras recomendadas por Django (`SECURE_BROWSER_XSS_FILTER`, `X_FRAME_OPTIONS`, tipos MIME seguros) activas en configuración.
 - Arquitectura stateless en la API salvo la persistencia compartida en MySQL, adecuada para escalar instancias de aplicación detrás de un balanceador siempre que todas compartan la misma base de datos y límites de conexión (`CONN_MAX_AGE` configurable).
 
-## Heurísticas de Nielsen aplicadas en la interfaz
-
-1. Visibilidad del estado del sistema mediante mensajes de estado y regiones `aria-live`.
-2. Alineación con el mundo real mediante vocabulario de biblioteca en español.
-3. Control y libertad del usuario con cancelación de edición y modal de confirmación de borrado.
-4. Consistencia e idiomas visuales coherentes en botones, tablas y formularios.
-5. Prevención de errores con validación antes de enviar y límites numéricos visibles.
-6. Reconocimiento antes que recuerdo usando listas desplegables para géneros normalizados.
-7. Flexibilidad para usuarios expertos mediante accesos por teclado y enlace de salto al contenido.
-8. Diseño minimalista sin elementos decorativos innecesarios.
-9. Ayuda a reconocer y recuperarse de errores con mensajes por campo y texto de ayuda corto.
-10. Ayuda y documentación accesibles desde el README y una nota contextual en la página.
 
 ## Instrucciones para ejecutar el proyecto
 
@@ -64,17 +52,11 @@ chmod +x setup.sh run.sh
 - Node.js 18 o superior y npm.
 - Servidor MySQL en funcionamiento.
 
-### Preparar la base de datos
-
-Cree la base de datos y el usuario. Puede adaptar el script de ejemplo:
-
-`scripts/mysql-init-ejemplo.sql`
 
 ### Configurar variables de entorno
 
 Copie `backend/.env.example` a `backend/.env` y ajuste credenciales y orígenes CORS.
 
-Opcional para el frontend en despliegues separados del backend: copie `frontend/.env.example` a `frontend/.env` y defina `VITE_API_URL` con la URL pública del backend (por ejemplo `https://api.midominio.com`). En desarrollo puede dejarla vacía para usar el proxy de Vite definido en `frontend/vite.config.js`.
 
 ### Backend
 
@@ -97,47 +79,6 @@ npm run dev
 
 Abra `http://localhost:5173` en el navegador.
 
-### Prueba rápida de idempotencia con curl
-
-Primera petición crea el recurso. Una segunda petición idéntica debería devolver `200` y el mismo cuerpo si la clave se reutiliza.
-
-```bash
-export CLAVE="clave-demo-12345678"
-curl -sS -X POST "http://127.0.0.1:8000/api/libros/" \
-  -H "Content-Type: application/json" \
-  -H "Idempotency-Key: $CLAVE" \
-  -d '{"titulo":"Demo","autor":"Autor Demo","anio":2020,"genero":"ficcion"}'
-
-curl -sS -X POST "http://127.0.0.1:8000/api/libros/" \
-  -H "Content-Type: application/json" \
-  -H "Idempotency-Key: $CLAVE" \
-  -d '{"titulo":"Demo","autor":"Autor Demo","anio":2020,"genero":"ficcion"}'
-```
-
-## Evidencias visuales
-
-Ilustración orientativa de la interfaz principal (mock visual generado como referencia de diseño cálido tipo librería):
-
-![Panel principal ilustrativo](./docs/evidencias/panel-principal.png)
-
-Para evidencias reales de ejecución local, puede sustituir o complementar esta imagen con capturas PNG tomadas desde el navegador una vez levantados backend y frontend.
-
-## Publicación en GitHub
-
-Repositorio del curso o entrega: [DavidReds7/examenDiagnostico](https://github.com/DavidReds7/examenDiagnostico).
-
-Flujo sugerido: trabajar en la rama `develop` y abrir un pull request hacia `main` cuando el código esté listo.
-
-```bash
-git checkout -b develop
-git add .
-git commit -m "Descripción del cambio"
-git remote add origin https://github.com/DavidReds7/examenDiagnostico.git
-git push -u origin develop
-```
-
-Si `origin` ya existe, omita `git remote add` y use `git push -u origin develop`.
-
 ## Uso de inteligencia artificial
 
-Se utilizó asistencia de IA en Cursor para generar la estructura del repositorio, el código del backend y frontend, las validaciones de seguridad solicitadas, la documentación de este README y una imagen ilustrativa de interfaz. Las decisiones de arquitectura (Django REST Framework, React con Vite, MySQL, idempotencia con cerrojos y modelo relacional) fueron elegidas para cumplir explícitamente los requisitos del enunciado.
+Se utilizó asistencia de IA en Cursor para generar la estructura del repositorio, el código del backend y frontend, las validaciones de seguridad solicitadas, la documentación de este README y una imagen ilustrativa de interfaz
