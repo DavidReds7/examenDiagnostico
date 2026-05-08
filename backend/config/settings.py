@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+from corsheaders.defaults import default_headers
 
 load_dotenv()
 
@@ -123,6 +124,12 @@ REST_FRAMEWORK = {
 _origenes = os.environ.get("CORS_ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173")
 CORS_ALLOWED_ORIGINS = [o.strip() for o in _origenes.split(",") if o.strip()]
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "idempotency-key",
+]
+CORS_EXPOSE_HEADERS = [
+    "Location",
+]
 
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
